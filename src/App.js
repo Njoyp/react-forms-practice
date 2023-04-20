@@ -1,54 +1,76 @@
 import { useState } from "react";
 import "./App.css";
 
+const initialFormData = {
+  name: "",
+  address: "",
+  phone: "",
+  email: "",
+  complaint: "",
+  contact: "",
+  consent: false,
+};
+
 export default function App() {
   //TODO: Add your state fields here
+  const [userData, setUserData] = useState(initialFormData);
+  const handleChange = (e) => {
+    const { name, type, value, checked } = e.target;
+    if (type === "checkbox") {
+      {
+        setUserData({ ...userData, [name]: checked });
+      }
+    } else {
+      setUserData({ ...userData, [name]: value });
+    }
+  };
 
-  const [name, setName] = useState(" ");
-  const [address, setAddress] = useState(" ");
-  const [tel, setTel] = useState(" ");
-  const [email, setEmail] = useState(" ");
-  const [complaint, setComplaint] = useState(" ");
-  const [contact, setContact] = useState(" ");
-  const [consent, setConsent] = useState(false);
+  // const [name, setName] = useState(" ");
+  // const [address, setAddress] = useState(" ");
+  // const [tel, setTel] = useState(" ");
+  // const [email, setEmail] = useState(" ");
+  // const [complaint, setComplaint] = useState(" ");
+  // const [contact, setContact] = useState(" ");
+  // const [consent, setConsent] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(userData);
   };
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
+  // const handleNameChange = (e) => {
+  //   setName(e.target.value);
+  // };
 
-  const handleAddressChange = (e) => {
-    setAddress(e.target.value);
-  };
+  // const handleAddressChange = (e) => {
+  //   setAddress(e.target.value);
+  // };
 
-  const handleTelChange = (e) => {
-    setTel(e.target.value);
-  };
+  // const handleTelChange = (e) => {
+  //   setTel(e.target.value);
+  // };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
 
-  const handleComplaintChange = (e) => {
-    setComplaint(e.target.value);
-  };
+  // const handleComplaintChange = (e) => {
+  //   setComplaint(e.target.value);
+  // };
 
-  const handleContactChange = (e) => {
-    setContact(e.target.value);
-  };
+  // const handleContactChange = (e) => {
+  //   setContact(e.target.value);
+  // };
 
-  const handleConsentChange = (e) => {
-    setConsent(e.target.checked);
-  };
+  // const handleConsentChange = (e) => {
+  //   setConsent(e.target.checked);
+  // };
   return (
     <>
-      {console.log(name)};{console.log(address)}; {console.log(tel)};{" "}
+      {/* {console.log(name)};{console.log(address)}; {console.log(tel)};{" "}
       {console.log(email)};{console.log(complaint)}; {console.log(contact)};
-      {console.log(consent)};
-      <form className="form">
+      {console.log(consent)}; */}
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Complaining form!</h2>
         <div className="form__section-left">
           <label>
@@ -57,8 +79,8 @@ export default function App() {
               type="text"
               name="name"
               required
-              onChange={handleNameChange}
-              value={name}
+              onChange={handleChange}
+              value={userData.name}
             />
           </label>
           <label>
@@ -66,8 +88,8 @@ export default function App() {
             <input
               type="text"
               name="address"
-              onChange={handleAddressChange}
-              value={address}
+              onChange={handleChange}
+              value={userData.address}
             />
           </label>
           <label>
@@ -75,8 +97,8 @@ export default function App() {
             <input
               type="tel"
               name="phone"
-              onChange={handleTelChange}
-              value={tel}
+              onChange={handleChange}
+              value={userData.phone}
             />
           </label>
 
@@ -85,8 +107,8 @@ export default function App() {
             <input
               type="email"
               name="email"
-              onChange={handleEmailChange}
-              value={email}
+              onChange={handleChange}
+              value={userData.email}
             />
           </label>
         </div>
@@ -98,8 +120,8 @@ export default function App() {
               name="complaint"
               rows="10"
               placeholder="You can complain here"
-              onChange={handleComplaintChange}
-              value={complaint}
+              onChange={handleChange}
+              value={userData.complaint}
             ></textarea>
           </label>
 
@@ -110,8 +132,8 @@ export default function App() {
                 type="radio"
                 name="contact"
                 value="phone"
-                onChange={handleContactChange}
-                checked={contact === "phone"}
+                onChange={handleChange}
+                checked={userData.contact === "phone"}
               />
               Phone
             </label>
@@ -121,8 +143,8 @@ export default function App() {
                 type="radio"
                 name="contact"
                 value="email"
-                onChange={handleContactChange}
-                checked={contact === "radio"}
+                onChange={handleChange}
+                checked={userData.contact === "radio"}
               />
               Email
             </label>
@@ -132,8 +154,8 @@ export default function App() {
                 type="radio"
                 name="contact"
                 value="post"
-                onChange={handleContactChange}
-                checked={contact === "post"}
+                onChange={handleChange}
+                checked={userData.contact === "post"}
               />
               Slow Mail
             </label>
@@ -143,8 +165,8 @@ export default function App() {
                 type="radio"
                 name="contact"
                 value="none"
-                onChange={handleContactChange}
-                checked={contact === "none"}
+                onChange={handleChange}
+                checked={userData.contact === "none"}
               />
               No contact!
             </label>
@@ -156,8 +178,8 @@ export default function App() {
               type="checkbox"
               name="consent"
               id="consent"
-              onChange={handleConsentChange}
-              checked={consent}
+              onChange={handleChange}
+              checked={userData.consent}
             />
           </label>
         </div>
